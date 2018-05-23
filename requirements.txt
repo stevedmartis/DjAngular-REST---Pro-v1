@@ -4,6 +4,7 @@ django-braces==1.13.0
 djangorestframework==3.8.2
 djangorestframework-jwt==1.11.0
 drf-friendly-errors==0.13
+gunicorn==19.8.1
 PyJWT==1.6.1
 pytz==2018.4
 static3==0.7.0
