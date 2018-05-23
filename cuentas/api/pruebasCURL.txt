@@ -1,0 +1,17 @@
+-OBTENER TOKEN USERNAME:
+curl -X POST -d "username=usuarioApi&password=password123" http://127.0.0.1:8000/api/partys/auth-token/
+
+
+6bc23b01492f21c41845162d03f5057ade6b757d
+
+PASAR TOKEN : 
+
+HTTPIE : http http://127.0.0.1:8000/api/usuarios/auth-token/ username='apitester' password='password123'
+       : http://127.0.0.1:8000/api/usuarios/username/ 
+
+APITESTER TOKEN : 6847a28b9baa9f5f51cd5739c0bf3892a39641e9
+
+
+
+-OBTENER TOKEN USERNAME:
+curl -X POST  http://127.0.0.1:8000/api/partys/create/

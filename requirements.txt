@@ -1,0 +1,7 @@
+Django==2.0.4
+django-braces==1.13.0
+djangorestframework==3.8.2
+djangorestframework-jwt==1.11.0
+drf-friendly-errors==0.13
+PyJWT==1.6.1
+pytz==2018.4
