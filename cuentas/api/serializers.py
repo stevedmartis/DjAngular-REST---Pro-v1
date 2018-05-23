@@ -15,6 +15,9 @@ from rest_framework.serializers import (
 from django.db.models import Q
 
 from rest_framework.validators import UniqueValidator
+from django.utils.translation import ugettext_lazy as _
+
+from rest_framework.compat import authenticate
 
 class UsuarioSerializer(ModelSerializer):
     class Meta:
@@ -72,3 +75,46 @@ class UsuarioDetalleSerializer(ModelSerializer):
             'username',
 
         ]
+
+
+class AuthTokenSerializer(serializers.Serializer):
+    email = serializers.CharField(label=_("Email"))
+    password = serializers.CharField(
+        label=_("Password"),
+        style={'input_type': 'password'},
+        trim_whitespace=False
+    )
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        if email and password:
+
+            try:
+                user_get = User.objects.get(email=email)
+
+
+                username = user_get.username
+                print(username)
+
+
+                user = authenticate(request=self.context.get('request'),
+                                username=username, password=password)
+
+                # The authenticate call simply returns None for is_active=False
+                # users. (Assuming the default ModelBackend authentication
+                # backend.)
+                if not user:
+
+                    raise serializers.ValidationError({'': 'Contraseña Incorrecta.'})
+
+            except User.DoesNotExist:
+
+                raise serializers.ValidationError({'': "Correo Electrónico Incorrecto."})
+        else:
+            msg = _('Must include "username" and "password".')
+            raise serializers.ValidationError(msg, code='authorization')
+
+        attrs['user'] = user
+        return attrs

@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.urls import path, include
 
 #TOKEN AUTH ENDPOINT
-from rest_framework.authtoken.views import obtain_auth_token
+
 
 
 
@@ -13,7 +13,8 @@ from .views import (
     UsuarioDetalleByIdAPIView,
     UsuarioEditarAPIView,
     UsuarioEliminarAPIView,
-    UserByEmail
+    UserByEmail,
+    obtain_auth_token
 )
 urlpatterns = [
     #url('',include(router.urls)),
